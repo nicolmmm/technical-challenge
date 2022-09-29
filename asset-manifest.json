@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/technical-challenge/static/css/main.cadd06c3.css",
-    "main.js": "/technical-challenge/static/js/main.b625b744.js",
+    "main.js": "/technical-challenge/static/js/main.95563376.js",
     "static/js/787.7ae4ab49.chunk.js": "/technical-challenge/static/js/787.7ae4ab49.chunk.js",
     "index.html": "/technical-challenge/index.html",
     "main.cadd06c3.css.map": "/technical-challenge/static/css/main.cadd06c3.css.map",
-    "main.b625b744.js.map": "/technical-challenge/static/js/main.b625b744.js.map",
+    "main.95563376.js.map": "/technical-challenge/static/js/main.95563376.js.map",
     "787.7ae4ab49.chunk.js.map": "/technical-challenge/static/js/787.7ae4ab49.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cadd06c3.css",
-    "static/js/main.b625b744.js"
+    "static/js/main.95563376.js"
   ]
 }
