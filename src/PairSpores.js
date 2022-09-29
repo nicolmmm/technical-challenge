@@ -26,5 +26,7 @@ console.log(
   PairSpores([10, 20, 20, 10, 10, 30, 50, 10, 20]),
   `
   For input [4, 3, 2 , 1]  the expected output is 0:`,
-  PairSpores([4, 3, 2, 1])
+  PairSpores([4, 3, 2, 1]),
+  `
+  logging from PairSpores.js`
 );

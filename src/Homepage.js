@@ -10,7 +10,7 @@ export default function Homepage() {
       <div className="body">
         <h2>Nicol Mouton</h2>
         <h1>BioScout Technical Challenge</h1>
-        <h3 style={{ color: "red" }}>Open the console to see tests output</h3>
+        <h3 style={{ color: "red" }}>Open the console to see test cases</h3>
         <PairSporesComponent />
         <FiboComponent />
       </div>

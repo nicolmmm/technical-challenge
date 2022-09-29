@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# BioScout Technical Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To view my code running visit [my deployed React UI on Github Pages](https://nicolmmm.github.io/technical-challenge/). Open the browser terminal to see the test outputs.
 
-## Available Scripts
+In this repo, the solution to the first problem, Pairing Spores, can be found in the PairSpore.js file. The solution for the second problem, Fibonacci Sequence, can be found in the Fibo.js file.
 
-In the project directory, you can run:
+## Pairing Spores
 
-### `npm start`
+For this question I tried several unsuccessful strategies before arriving at my final solution.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+My initial instinct was to implement nested loops to compare each item in the array to every other item in the array, when the items match, to increment the sporePairs count. I soon realised that values would match multiple times. Every solution I thought of to account for this created more nested loops, like pushing outer loop items to a new array and comparing all inner loop items to this array to ensure no double ups. I abandoned this strategy before arriving at a working solution.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Writing in pseudo code, the next strategy was:
 
-### `npm test`
+- Using a while-loop, loop through the given array and filter out all values matching index[0]
+- then numberOfMatches=(originalArray.length- filteredArray.length)
+  If the matches was an odd number, -1, then / 2 to find the number of pairs.
+- Repeat for every value until there are no items left in the array causing the while loop to finish.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Implementing this because very long and disconcerted and I also abandoned this before I reached a working solution.
 
-### `npm run build`
+### Solution
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Finally I reached a concise solution:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+function PairSpores(sporeArray) {
+let sporePairCount = 0;
+const copiedArray = [...sporeArray];
+copiedArray.sort();
+for (let index = 0; index < sporeArray.length; index++) {
+if (copiedArray[index] === copiedArray[index + 1]) {
+index++;
+sporePairCount++;
+}
+}
+return sporePairCount;
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+sporePairCount=sporePairCount
+}
 
-### `npm run eject`
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This solution relies on a single loop. It sorts the array by item value, comparing items next to one another `(copiedArray[index] and copiedArray[index+1])`. Each time the loop runs, if a match is not found it index increments by 1 comparing the next item in the array to the previous item. If a match is found, the sporePairCount increments by 1 and index increments by 2, so not to compare a value that has already been matched in a pair.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![](src/images/matching-spores-example.jpg)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Fibonacci sequence
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Since every number in the fibonacci sequence is the sum of the 2 previous numbers, it was a very satisfying solution to implement.
 
-## Learn More
+```
+function Fibo(n) {
+if (n === 0) {
+return 0;
+}
+if (n === 1) {
+    return 1;
+  } else {
+let a = 0;
+let b = 1;
+let c;
+for (let index = 1; index < n; index++) {
+c = a + b;
+a = b;
+b = c;
+}
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+return c;
+}
+}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Using a for-loop, I set the loop exit condition to the `n` argument, the position of the sequence I want to find the value of.
 
-### Analyzing the Bundle Size
+```
+for (let index = 1; index < n; index++){
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The loop will recursively find the next numbers of the sequence by adding the previous 2. Each time the loop runs `c` if given the value of sum of `a` and `b`, `a` is given the value of `b` and `b` is given the value of `c`. In my implementation I have handle cases for n=0 or n=1 with `if` statements because in these cases they will not meet the condition for the for-loop to run in the first place.

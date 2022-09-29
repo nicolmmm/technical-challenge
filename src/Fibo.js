@@ -32,5 +32,7 @@ console.log(
   Fibo(15),
   `
   for fibo(31) the expected test outcome is = 21= 1346269:`,
-  Fibo(31)
+  Fibo(31),
+  `
+  logging from Fibo.js`
 );
