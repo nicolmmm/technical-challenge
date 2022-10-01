@@ -24,6 +24,27 @@ code {
   line-height: normal;
 }
 
+.get-output-btn{
+  display: flex;
+  margin-top: 1rem;
+}
+
 .input-description{
  font-size: smaller;
+}
+
+.variable-input{
+display: flex;}
+
+
+/* remove the up and down arrow counter on number type input fields */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.errors {
+  margin:0;
+  color: red;
 }

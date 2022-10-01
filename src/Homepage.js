@@ -1,6 +1,6 @@
 //import Fibo from "./Fibo";
-import PairSporesComponent from "./PairSporesComponent";
-import FiboComponent from "./FiboComponent";
+import PairSporesComponent from "./components/PairSporesComponent";
+import FiboComponent from "./components/FiboComponent";
 import Fibo from "./Fibo";
 import PairSpores from "./PairSpores";
 

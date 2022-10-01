@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function PairSporesComponent() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [pairSporesOutput, SetPairSporesOutput] = useState("");
 
   function PairSpores(sporeArray = []) {
@@ -21,11 +27,10 @@ export default function PairSporesComponent() {
     return sporePairCount;
   }
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    const sporeArrayInput = event.target.sporeArray.value;
+  const onSubmit = (data) => {
+    const sporeArrayInput = data.variableInput;
     //converting the string data into an array of numbers
-    const sporeArrayInputSplit = sporeArrayInput.split(", ");
+    const sporeArrayInputSplit = sporeArrayInput.split(",");
     const sporeArrayToNumber = sporeArrayInputSplit.map((item) => Number(item));
     //setting the output state to the number of pairs found
     SetPairSporesOutput(PairSpores(sporeArrayToNumber));
@@ -34,30 +39,40 @@ export default function PairSporesComponent() {
   return (
     <div className="questions">
       <h3>Pairing Spores!</h3>
-      <i className="input-description">
-        The sporeArray variable expects integers seperated by a coma then a
-        space
-      </i>
       <div className="code-example">
-        {`function PairSpores([`}
-        <form onSubmit={onSubmit}>
-          <input
-            className="variable-input"
-            placeholder="sporeArray"
-            name={"sporeArray"}
-          ></input>
-        </form>
-        {`]) {
-let sporePairCount = 0;
+        <span className="variable-input">
+          {" "}
+          {`function PairSpores([`}
+          {
+            <form id="my-form" onSubmit={handleSubmit(onSubmit)}>
+              <input
+                className="variable-input"
+                placeholder="sporeArray"
+                name="sporeArray"
+                {...register("variableInput", {
+                  pattern: {
+                    //using Regex expression to match integers seperated by commas: https://stackoverflow.com/questions/56753932/regex-for-numbers-commas-and-whitespaces
+                    value: /^\s*\d+(?:\s*,\s*\d+)*\s*$/g,
+                    message:
+                      "The sporeArray variable expects integers seperated by comas",
+                  },
+                })}
+              ></input>
+            </form>
+          }
+          {`]){`}
+          <p className="errors">{errors?.variableInput?.message}</p>
+        </span>
+        {`let sporePairCount = 0;
 const copiedArray = [...sporeArray];
 copiedArray.sort();
 for (let index = 0; index < sporeArray.length; index++) {
-if (copiedArray[index] === copiedArray[index + 1]) {
-index++;
-sporePairCount++;
-}
-}
-return sporePairCount;
+      if (copiedArray[index] === copiedArray[index + 1]) {
+        index++;
+        sporePairCount++;
+    } 
+  }
+  return sporePairCount;
 
 sporePairCount=sporePairCount
 }
@@ -65,6 +80,9 @@ sporePairCount=sporePairCount
 output: 
 `}
         <b>{pairSporesOutput}</b>
+        <button className="get-output-btn" type="submit" form="my-form">
+          Get output
+        </button>
       </div>
     </div>
   );
