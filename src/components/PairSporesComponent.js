@@ -29,9 +29,14 @@ export default function PairSporesComponent() {
 
   const onSubmit = (data) => {
     const sporeArrayInput = data.variableInput;
-    //converting the string data into an array of numbers
+    //SporeArrayInput will be typeof string. Splitting string by commas
     const sporeArrayInputSplit = sporeArrayInput.split(",");
-    const sporeArrayToNumber = sporeArrayInputSplit.map((item) => Number(item));
+    //filtering out empty strings or empty spaces between comas
+    const filteredSporeArray = sporeArrayInputSplit.filter(
+      (item) => item !== "" && item !== " " && item !== "  "
+    );
+    //converting the string data into an array of numbers
+    const sporeArrayToNumber = filteredSporeArray.map((item) => Number(item));
     //setting the output state to the number of pairs found
     SetPairSporesOutput(PairSpores(sporeArrayToNumber));
   };
@@ -51,8 +56,8 @@ export default function PairSporesComponent() {
                 name="sporeArray"
                 {...register("variableInput", {
                   pattern: {
-                    //using Regex expression to match integers seperated by commas: https://stackoverflow.com/questions/56753932/regex-for-numbers-commas-and-whitespaces
-                    value: /^\s*\d+(?:\s*,\s*\d+)*\s*$/g,
+                    //using Regex expression to match positive and negative integers seperated by commas: https://regex101.com/r/oXauV4/1
+                    value: /^(?:-?\d+[, ]*)+$/g,
                     message:
                       "The sporeArray variable expects integers seperated by comas",
                   },
