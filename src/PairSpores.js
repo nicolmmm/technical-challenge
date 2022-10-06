@@ -3,7 +3,9 @@ export default function PairSpores(sporeArray = []) {
   //copying the sporeArray so not to change the original array
   const copiedArray = [...sporeArray];
   //sorting the array from smallest to largest integer
-  copiedArray.sort();
+  copiedArray.sort(function (a, b) {
+    return a - b;
+  });
   //for-loop to iterate over the array
   for (let index = 0; index < sporeArray.length; index++) {
     //comparing values next to one another in copiedArray

@@ -14,7 +14,9 @@ export default function PairSporesComponent() {
     //copying the sporeArray so not to change the original array
     const copiedArray = [...sporeArray];
     //sorting the array from smallest to largest integer
-    copiedArray.sort();
+    copiedArray.sort(function (a, b) {
+      return a - b;
+    });
     //for-loop to iterate over the array
     for (let index = 0; index < sporeArray.length; index++) {
       //comparing values next to one another in copiedArray
@@ -32,6 +34,8 @@ export default function PairSporesComponent() {
     //SporeArrayInput will be typeof string. Splitting string by commas
     const sporeArrayInputSplit = sporeArrayInput.split(",");
     //filtering out empty strings or empty spaces between comas
+    //To perfectly validate user input I think i need to write a regex expression in line 64 to NOT match commas without integers between them but I haven't found the correct expression yet
+    //The below filter will catch the following user inputs to not create false matches: ",,"+", ,"+ ",  ,"
     const filteredSporeArray = sporeArrayInputSplit.filter(
       (item) => item !== "" && item !== " " && item !== "  "
     );
@@ -70,7 +74,9 @@ export default function PairSporesComponent() {
         </span>
         {`let sporePairCount = 0;
 const copiedArray = [...sporeArray];
-copiedArray.sort();
+copiedArray.sort(function (a, b) {
+     return a - b;
+  });
 for (let index = 0; index < sporeArray.length; index++) {
       if (copiedArray[index] === copiedArray[index + 1]) {
         index++;
